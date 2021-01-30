@@ -1,6 +1,8 @@
 # TinyIR
 Samsung IR Protocol decoder written for ATTiny13 and MicroCore.
 
+### [Download](https://github.com/Ivan-Alone/TinyIR/raw/main/TinyIR.zip)
+
 ## Information and requirements:
 Examples of resulting sizes:
 - Empty MicroCore project: 142 bytes memory, 4 bytes RAM

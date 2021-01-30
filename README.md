@@ -16,19 +16,19 @@ This library using hardware interrupt **INT0** on **PB1** pin on **ATTiny13**, y
 ![Connection Diagram](https://raw.githubusercontent.com/Ivan-Alone/TinyIR/main/tinyir_connection.png)
 
 ## Functions: 
-```
+```C++
 void IR_Init();
 ```
 
 Must be called in setup() function. Initialize **INT0** on **PB1**, thats doing all data receiving and processing functions.
 
-```
+```C++
 bool IR_CheckCode(uint32_t code);
 ```
 
 Checking receivced code. Returns **TRUE** if code was received. Can be used in loop, in constuction like:
 
-```
+```C++
 if (IR_CheckCode(0x7070FF00) {
     // Doing some stuff when 0x7070FF00 code received
 }
@@ -37,11 +37,15 @@ if (IR_CheckCode(0x7070FF00) {
 ## Configuration
 You can reduce memory usage used by this library! We have 2 configuration constants. All those constants **MUST** be defined **BEFORE** including TinyIR. Take care - you CAN'T edit this settigs in your code logic - it's *hard* settigns, that applies on compiling stage.
 
-	#define TinyIR_NO_ACCURATE_DECODING
+```C++
+#define TinyIR_NO_ACCURATE_DECODING
+```
 
 Disables accurate decoding. Samsung remote control sends impulse ~1640 μS long for "1" bit value, and ~500 μS long for "0". Using disabled accurate decoding we don't check lenght of "0" impulse (checking just lenght of "1" impulse), so we can reduce memory usage for 20-22 bytes in ROM.
 
-	#define TinyIR_DISABLE_REPEAT
+```C++
+#define TinyIR_DISABLE_REPEAT
+```
 
 Some remote control that uses Samsung protocol doesn't resend code if button is hold. Those RC sends some "repeat code", that can be decoded in 0x0 or 0x1. So, if we don't need hold tracking, or our RC sends real codes if button is hold, we can disable decoding of repeat codes, that can reduce memory usage for 112-114 bytes in ROM.
 
@@ -49,7 +53,7 @@ Remember - some RC sends "repeat codes", some sends real code (RC from Samsung T
 
 ## Example
 
-```
+```C++
 // Disable accurate decoding
 #define TinyIR_NO_ACCURATE_DECODING 
 // Disable repeat decoding
